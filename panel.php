@@ -233,10 +233,10 @@ if ($_POST['action'] ?? '' === 'create_post' && $isAdmin) {
 // Handle post deletion
 if ($_POST['action'] ?? '' === 'delete_post' && $isAdmin) {
     $postId = (int)$_POST['post_id'];
-    logSuccess("Post deletion attempt", ['post_id' => $postId]);
+    error_log("Post deletion attempt: " . $postId);
     $stmt = $pdo->prepare("DELETE FROM posts WHERE id = ?");
     $stmt->execute([$postId]);
-    logSuccess("Post deleted successfully", ['post_id' => $postId]);
+    error_log("Post deleted successfully: " . $postId);
     $success = 'Post o\'chirildi';
 }
 

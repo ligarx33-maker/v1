@@ -67,7 +67,10 @@ function validateCaptcha($userInput, $sessionCaptcha) {
 }
 
 function sanitizeInput($data) {
-    return htmlspecialchars(strip_tags(trim($data)), ENT_QUOTES, 'UTF-8');
+    if ($data === null || $data === '') {
+        return '';
+    }
+    return htmlspecialchars(strip_tags(trim((string)$data)), ENT_QUOTES, 'UTF-8');
 }
 
 function validateEmail($email) {
@@ -81,8 +84,8 @@ function createSlug($title) {
 
 // Response helper
 function jsonResponse($data, $status = 200) {
-    // Log all responses
-    logSuccess("API Response", ['status' => $status, 'data' => $data]);
+    // Log all responses  
+    error_log("API Response: " . json_encode(['status' => $status, 'success' => $data['success'] ?? 'unknown']));
     http_response_code($status);
     header('Content-Type: application/json');
     echo json_encode($data, JSON_UNESCAPED_UNICODE);

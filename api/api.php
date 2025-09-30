@@ -605,12 +605,12 @@ try {
             break;
 
         case 'test':
-            logSuccess("Test endpoint called");
+            error_log("Test endpoint called");
             jsonResponse(['success' => true, 'message' => 'API ishlamoqda', 'timestamp' => date('Y-m-d H:i:s')]);
             break;
 
         default:
-            logError("Unknown API action", ['action' => $request, 'method' => $method]);
+            error_log("Unknown API action: " . json_encode(['action' => $request, 'method' => $method]));
             jsonResponse(['success' => false, 'message' => 'Noto\'g\'ri so\'rov'], 404);
     }
 
@@ -626,7 +626,7 @@ try {
         'timestamp' => date('Y-m-d H:i:s')
     ];
     
-    logError("CRITICAL API ERROR", $errorDetails);
+    error_log("CRITICAL API ERROR: " . json_encode($errorDetails));
     jsonResponse(['success' => false, 'message' => 'Server xatosi yuz berdi'], 500);
 }
 ?>
