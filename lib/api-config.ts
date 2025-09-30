@@ -1,4 +1,4 @@
-export const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || "https://stacknest.site/blogpost"
+export const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || "https://stacknest.site/blogpost/api"
 
 export const apiEndpoints = {
   posts: `${API_BASE_URL}/api.php?action=posts`,
